@@ -42,13 +42,15 @@ def est_bissextile(annee:int)-> bool :
         annee:int représente l'année qu'on veut tester
     outputs:
         boolean: True si l'année est bissextile,
-        False sinon
+                 False sinon
     """
     return (annee % 4 == 0 and annee % 100 != 0) or annee % 400 == 0
 
 def test_bissextile():
     """Affiche si les années données sont bissextiles."""
     liste = [2021, 2024, 2100, 2000]
+    #2021, 2100 ne sont pas bissextiles
+    #2000, 2024 sont bissextiles
     for i in liste:
         print(i, ":", est_bissextile(i))
 
@@ -101,9 +103,9 @@ def equation(a:int, b:int, c:int):
 
 def test_equation():
     """Test de résolution d'équations du second degré"""
-    equation(1,6,2)
-    equation(5,-3,2)
-    equation(1,-2,1)
+    equation(1,6,2) #2 racines
+    equation(5,-3,2) #Pas de racine
+    equation(1,-2,1) #1 racine
 
 test_equation()
 
@@ -159,7 +161,7 @@ def age(date_naissance:date)-> int :
 def est_majeur(date_naissance:date)-> bool :
     """Vérifie si l'individu est majeur"""
     MAJORITE = 18
-    return (age(date_naissance) > MAJORITE)
+    return (age(date_naissance) >= MAJORITE)
 
 def test_acces():
     """Test d'accès aux personnes majeures"""
