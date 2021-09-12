@@ -49,10 +49,10 @@ type_caractere()
 def imposable():
     """Affiche si l'habitant est imposable ou non"""
     sexe = "" ; age = -1
-    while sexe not in ["H","F","h","f"] or age < 0: #Vérification H/F et âge positif
-        sexe = input("Saisir le sexe (H/F) : ")
+    while sexe not in ["H","F"] or age < 0: #Vérification H/F et âge positif
+        sexe = input("Saisir le sexe (H/F) : ").upper()
         age = int(input("Saisir l'âge : "))
-    if (sexe in ["H","h"] and age > 20) or (sexe in ["F","f"] and age >= 18 and age <= 35):
+    if (sexe == "H" and age > 20) or (sexe == "F" and age >= 18 and age <= 35):
         print("Habitant imposable")
     else:
         print("Habitant non imposable")
@@ -76,7 +76,8 @@ def prix_reprographie():
     elif copies <= MAX_COPIES1 + MAX_COPIES2:
         prix = MAX_COPIES1 * PRIX1 + (copies - MAX_COPIES1) * PRIX2
     else:
-        prix = MAX_COPIES1 * PRIX1 + MAX_COPIES2 * PRIX2 + (copies - MAX_COPIES1 - MAX_COPIES2) * PRIX3
+        prix = MAX_COPIES1 * PRIX1 + MAX_COPIES2 * PRIX2
+        prix += (copies - MAX_COPIES1 - MAX_COPIES2) * PRIX3
     prix = round(prix, 2)
     print("Prix =", prix, "€")
 
