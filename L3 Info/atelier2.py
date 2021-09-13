@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-#Auteurs : Félicien BERTRAND, Jean BERTRAND
-#Date : 08/09/2021
-#Version : 1
-#Description : Exercices de l'atelier 2
+"""
+Auteurs : Félicien BERTRAND, Jean BERTRAND
+Date : 08/09/2021
+Version : 1
+Description : Exercices de l'atelier 2
+"""
 
 from datetime import date
 
 #Exercice 1
-def message_imc(imc:float)-> str :
+def message_imc(imc: float)-> str:
     """Renvoie un message interprétant un IMC donné"""
     if imc < 16.5:
         msg = "dénutrition ou famine"
@@ -27,15 +29,15 @@ def message_imc(imc:float)-> str :
 
 def test_imc():
     """Affiche les messages correspondant aux IMC"""
-    print("IMC de 16 :" , message_imc(16))
-    print("IMC de 29 :" , message_imc(29))
-    print("IMC de 37 :" , message_imc(37))
+    print("IMC de 16 :", message_imc(16))
+    print("IMC de 29 :", message_imc(29))
+    print("IMC de 37 :", message_imc(37))
 
 test_imc()
 
 
 #Exercice 2
-def est_bissextile(annee:int)-> bool :
+def est_bissextile(annee: int)-> bool:
     """
     Renvoie si une année est bissextile ou non
     inputs:
@@ -58,17 +60,17 @@ test_bissextile()
 
 
 #Exercice 3
-def discriminant(a:float, b:float, c:float)-> float :
+def discriminant(a: float, b: float, c: float)-> float:
     """Calcule et renvoie le discriminant"""
     delta = b ** 2 - 4 * a * c
     return delta
 
-def racine_unique(a:float, b:float)-> float :
+def racine_unique(a: float, b: float)-> float:
     """Calcule et renvoie la racine unique"""
     x = -b / (2 * a)
     return x
 
-def racine_double(a:float, b:float, delta:float, num:int)-> float :
+def racine_double(a: float, b: float, delta: float, num: int)-> float:
     """Calcule et renvoie la racine double"""
     if num == 1:
         x = (-b + delta**(1/2)) / (2 * a)
@@ -76,65 +78,66 @@ def racine_double(a:float, b:float, delta:float, num:int)-> float :
         x = (-b - delta**(1/2)) / (2 * a)
     return x
 
-def str_equation(a:float, b:float, c:float)-> str :
+def str_equation(a: float, b: float, c: float)-> str:
     """Renvoie l'affichage de l'équation"""
-    msg = "{}x² + {}x + {} = 0".format(a,b,c)
+    msg = "{}x² + {}x + {} = 0".format(a, b, c)
     return msg
 
-def solution_equation(a:float, b:float, c:float)-> str :
+def solution_equation(a: float, b: float, c: float)-> str:
     """Renvoie le message correspondant au nombre de racines"""
-    delta = discriminant(a,b,c)
-    msg = "Solution de l'équation {}\n".format(str_equation(a,b,c))
+    delta = discriminant(a, b, c)
+    msg = "Solution de l'équation {}\n".format(str_equation(a, b, c))
     if delta < 0:
         msg += "Pas de racine réelle"
     elif delta == 0:
         msg += "Racine unique : x = "
-        msg += str(racine_unique(a,b))
+        msg += str(racine_unique(a, b))
     else:
         msg += "Deux racines :\nx1 = "
-        msg += str(racine_double(a,b,delta,1))
+        msg += str(racine_double(a, b, delta, 1))
         msg += "\nx2 = "
-        msg += str(racine_double(a,b,delta,2))
+        msg += str(racine_double(a, b, delta, 2))
     return msg
 
-def equation(a:int, b:int, c:int):
+def equation(a: int, b: int, c: int):
     """Affiche la solution de l'équation"""
-    print(solution_equation(a,b,c))
+    print(solution_equation(a, b, c))
 
 def test_equation():
     """Test de résolution d'équations du second degré"""
-    equation(1,6,2) #2 racines
-    equation(5,-3,2) #Pas de racine
-    equation(1,-2,1) #1 racine
+    equation(1, 6, 2) #2 racines
+    equation(5, -3, 2) #Pas de racine
+    equation(1, -2, 1) #1 racine
 
 test_equation()
 
 
 #Exercice 4
-def date_est_valide(jour:int, mois:int, annee:int)-> bool :
+def date_est_valide(jour: int, mois: int, annee: int)-> bool:
     """Vérifie si la date donnée est valide"""
     ANNEE_MIN = 1900
     aujourdhui = date.today()
+    verif = True
     if (annee < ANNEE_MIN or annee > aujourdhui.year): #Vérification de l'année
-        return False
-    if (mois <= 0 or mois > 12): #Vérification du mois
-        return False
-    if (jour <= 0 or jour > 31): #Vérification du jour
-        return False
-    if (annee == aujourdhui.year):    #Cas de l'année actuelle
-        if (mois > aujourdhui.month):
-            return False
-        if (mois == aujourdhui.month and jour > aujourdhui.day):
-            return False
-    if (mois == 2): #Vérification du mois de février
+        verif = False
+    elif (mois <= 0 or mois > 12): #Vérification du mois
+        verif = False
+    elif (jour <= 0 or jour > 31): #Vérification du jour
+        verif = False
+    elif annee == aujourdhui.year:    #Cas de l'année actuelle
+        if mois > aujourdhui.month:
+            verif = False
+        elif (mois == aujourdhui.month and jour > aujourdhui.day):
+            verif = False
+    elif mois == 2: #Vérification du mois de février
         if (jour > 29 or (not est_bissextile(annee) and jour == 29)):
-            return False
-    if (jour == 31                          #Vérification du jour 31
-        and mois not in [1,3,5,7,8,10,12]):
-        return False
-    return True
+            verif = False
+    elif (jour == 31                          #Vérification du jour 31
+            and mois not in [1, 3, 5, 7, 8, 10, 12]):
+        verif = False
+    return verif
 
-def saisie_date_naissance()-> date :
+def saisie_date_naissance()-> date:
     """Saisie de la date de naissance"""
     valide = False
     while not valide:
@@ -142,26 +145,26 @@ def saisie_date_naissance()-> date :
         annee = int(input("Année : "))
         mois = int(input("Mois : "))
         jour = int(input("Jour : "))
-        valide = date_est_valide(jour,mois,annee)
+        valide = date_est_valide(jour, mois, annee)
         if not valide:
             print("Date invalide")
-    return date(annee,mois,jour)
+    return date(annee, mois, jour)
 
-def age(date_naissance:date)-> int :
+def age(date_naissance: date)-> int:
     """Calcul de l'âge avec la date de naissance"""
     aujourdhui = date.today()
-    age = aujourdhui.year - date_naissance.year
+    age_p = aujourdhui.year - date_naissance.year
     if (date_naissance.month > aujourdhui.month
-        or
-        date_naissance.month == aujourdhui.month
-        and date_naissance.day > aujourdhui.day):
-        age -= 1
-    return age
+            or
+            date_naissance.month == aujourdhui.month
+            and date_naissance.day > aujourdhui.day):
+        age_p -= 1
+    return age_p
 
-def est_majeur(date_naissance:date)-> bool :
+def est_majeur(date_naissance: date)-> bool:
     """Vérifie si l'individu est majeur"""
     MAJORITE = 18
-    return (age(date_naissance) >= MAJORITE)
+    return age(date_naissance) >= MAJORITE
 
 def test_acces():
     """Test d'accès aux personnes majeures"""
