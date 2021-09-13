@@ -191,11 +191,12 @@ def val_max(lst: list)-> int:
         int: valeur max de la liste
     """
     if len(lst) == 0:
-        return 0
-    maxi = lst[0]
-    for e in lst:
-        if maxi < e:
-            maxi = e
+        maxi = 0
+    else:
+        maxi = lst[0]
+        for e in lst:
+            if maxi < e:
+                maxi = e
     return maxi
 
 def test_val_max():
@@ -269,22 +270,25 @@ def position2(lst: list, e: int)-> int:
     outputs:
         int: indice de e dans la liste (-1 si non présent)
     """
+    pos = -1
     i = 0
-    while i < len(lst):
+    while(pos == -1 and i < len(lst)):
         if lst[i] == e:
-            return i
+            pos = i
         i += 1
-    return -1
+    return pos
+
+position = position1
 
 def test_position():
     """Test de la fonction position"""
     print("TEST POSITION")
     #test liste vide
-    print("Test liste vide :", position1([], 0))
+    print("Test liste vide :", position([], 0))
     #test position 1
     lst = [-4, 3, 8, -1, 0]
     e = 3
-    print("Test position 1 :", position1(lst, e))
+    print("Test position 1 :", position(lst, e))
 
 test_position()
 
