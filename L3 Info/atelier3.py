@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Auteur : Félicien BERTRAND, Jean BERTRAND
+Auteurs : Félicien BERTRAND, Jean BERTRAND
 Date : 12/09/2021
 Version : 1
 Description : Exercices de l'atelier 3
