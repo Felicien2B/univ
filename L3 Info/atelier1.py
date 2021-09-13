@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
-#Auteurs : Félicien BERTRAND, Jean BERTRAND
-#Date : 08/09/2021
-#Version : 1
-#Description : Exercices de l'atelier 1
+"""
+Auteurs : Félicien BERTRAND, Jean BERTRAND
+Date : 08/09/2021
+Version : 1
+Description : Exercices de l'atelier 1
+"""
 
 #Exercice 1
 def calcul_salaire():
     """Calcul du salaire mensuel d'un employé payé à l'heure"""
-    HSUP1 = 160 ; MAJ1 = 0.25 #+25% au-dessus de 160 heures
-    HSUP2 = 200 ; MAJ2 = 0.5 #+50% au-dessus de 200 heures
-    s_horaire = -1; heures = -1
+    HSUP1 = 160
+    MAJ1 = 0.25 #+25% au-dessus de 160 heures
+    HSUP2 = 200
+    MAJ2 = 0.5 #+50% au-dessus de 200 heures
+    s_horaire = -1
+    heures = -1
     while s_horaire < 0 or heures < 0: #Vérification nombres positifs
         s_horaire = float(input("Salaire horaire : "))
         heures = int(input("Nombre d'heures : "))
@@ -20,7 +25,6 @@ def calcul_salaire():
         salaire += s_horaire * MAJ1 * (HSUP2 - HSUP1) #+25% entre 160 et 200h
         salaire += s_horaire * MAJ2 * (heures - HSUP2) #+50% au-dessus de 200h
     print("Salaire mensuel =", salaire)
-        
 
 #s_horaire = 10
 #heures = 220
@@ -48,8 +52,9 @@ type_caractere()
 #Exercice 3
 def imposable():
     """Affiche si l'habitant est imposable ou non"""
-    sexe = "" ; age = -1
-    while sexe not in ["H","F"] or age < 0: #Vérification H/F et âge positif
+    sexe = ""
+    age = -1
+    while sexe not in ["H", "F"] or age < 0: #Vérification H/F et âge positif
         sexe = input("Saisir le sexe (H/F) : ").upper()
         age = int(input("Saisir l'âge : "))
     if (sexe == "H" and age > 20) or (sexe == "F" and age >= 18 and age <= 35):
@@ -65,8 +70,10 @@ imposable()
 #Exercice 4
 def prix_reprographie():
     """Calcul du prix total des photographies"""
-    PRIX1 = 0.10 ; MAX_COPIES1 = 10 #0.10 € par photocopie pour les 10 premières
-    PRIX2 = 0.09 ; MAX_COPIES2 = 20 #0.09 € par photocopie pour les 20 suivantes
+    PRIX1 = 0.10
+    MAX_COPIES1 = 10 #0.10 € par photocopie pour les 10 premières
+    PRIX2 = 0.09
+    MAX_COPIES2 = 20 #0.09 € par photocopie pour les 20 suivantes
     PRIX3 = 0.08 #0.08 € par photocopie pour les suivantes
     copies = -1
     while copies < 0: #Vérification nombre positif
@@ -88,13 +95,17 @@ prix_reprographie()
 #Exercice 5
 def calcul_frais():
     """Calcul des frais protuaires d'un voilier"""
-    CATEGORIES = [1,2,3] #Les catégories et leurs taxes correspondantes sont dans le même ordre
-    TAXES = [100,150,250]
-    COUT_M1 = 100 ; LONG1 = 5 #Coût mensuel de 100 € pour moins de 5 m
-    COUT_M2 = 200 ; LONG2 = 10 #Coût mensuel de 200 € pour 5 à 10 m
-    COUT_M3 = 400 ; LONG3 = 12 #Coût mensuel de 400 € pour 10 à 12 m
+    CATEGORIES = [1, 2, 3] #Les catégories et leurs taxes correspondantes sont dans le même ordre
+    TAXES = [100, 150, 250]
+    COUT_M1 = 100
+    LONG1 = 5 #Coût mensuel de 100 € pour moins de 5 m
+    COUT_M2 = 200
+    LONG2 = 10 #Coût mensuel de 200 € pour 5 à 10 m
+    COUT_M3 = 400
+    LONG3 = 12 #Coût mensuel de 400 € pour 10 à 12 m
     COUT_M4 = 600 #Coût mensuel de 600 € pour plus de 12 m
-    longueur = 0; categorie = 0
+    longueur = 0
+    categorie = 0
     nom = input("Nom du voilier : ")
     while longueur <= 0: #Vérification longueur positive
         longueur = int(input("Longueur du voilier (m) : "))
@@ -109,7 +120,8 @@ def calcul_frais():
     else:
         cout_mensuel = COUT_M4
     cout_annuel = cout_mensuel * 12 + TAXES[categorie-1]
-    print("Le coût annuel d'une place au port pour le voilier", nom, "est de", cout_annuel, "euros.")
+    print("Le coût annuel d'une place au port pour le voilier", nom, "est de",
+          cout_annuel, "euros.")
 
 #nom = "Saxo"
 #longueur = 6
@@ -120,7 +132,7 @@ calcul_frais()
 #Exercice 6
 def frais_voiture():
     """Calcul des frais mensuels des voitures du concessionnaire"""
-    CARBURANTS = ["D","E"]
+    CARBURANTS = ["D", "E"]
     SURCOUT_D = 0.70 #Surcoût de 70% aux véhicules diesel
     SURCOUT_E = 0.50 #Surcoût de 50% aux véhicules essence
     CONSO1 = 100/10 #Consommation de 10 litres aux 100 km
@@ -172,8 +184,8 @@ def elections():
             print("Le candidat 1 est éliminé.")
         else:
             if (candidat1 > candidat2
-                and candidat1 > candidat3
-                and candidat1 > candidat4):
+                    and candidat1 > candidat3
+                    and candidat1 > candidat4):
                 print("Le candidat 1 est en ballotage favorable.")
             else:
                 print("Le candidat 1 est en ballotage défavorable.")
@@ -197,7 +209,7 @@ def assurance():
     accidents = int(input("Nombre d'accidents : "))
     fidelite = int(input("Années d'assurance avec la compagnie : "))
     if (age < AGE_MIN or permis < 0 or permis > age - AGE_MIN
-        or accidents < 0 or fidelite < 0 or fidelite > permis):
+            or accidents < 0 or fidelite < 0 or fidelite > permis):
         print("Données incorrectes")
     else:
         tarif = 2 #Tarif "normal" : tarif vert
