@@ -79,6 +79,3 @@ def test_is_mail()-> bool:
     return succes
 
 test_is_mail()
-
-
-#Exercice 2
