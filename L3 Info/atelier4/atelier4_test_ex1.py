@@ -10,10 +10,10 @@ import atelier4_ex1
 full_name = atelier4_ex1.full_name
 is_mail = atelier4_ex1.is_mail
 
-#Exercice 1
 def test_full_name()-> bool:
     """
     Test de la fonction full_name
+
     outputs:
         bool: True si le test est réussi
               False en cas d'échec
@@ -46,6 +46,7 @@ test_full_name()
 def test_is_mail()-> bool:
     """
     Test de la fonction is_mail
+
     outputs:
         bool: True si le test est réussi
               False en cas d'échec
@@ -57,7 +58,7 @@ def test_is_mail()-> bool:
                     'bisgambiglia_paul@uni-corse.fr',
                     'bisgambiglia_paul@univ-corsePOINTfr'] #Chaînes de test
     #Retours attendus
-    lst_tuple_attendu = [(1, 6456), (0, 1), (0, 2), (0, 3), (0, 4)]
+    lst_tuple_attendu = [(1, 0), (0, 1), (0, 2), (0, 3), (0, 4)]
     succes = True #Résultat global du test
     nb_tests = len(lst_str_test) #Nombre de tests
     for i in range(nb_tests):
