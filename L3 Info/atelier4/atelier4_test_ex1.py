@@ -6,9 +6,9 @@ Version : 1
 Description : Test de l'exercice 1 de l'atelier 4
 """
 
-import atelier4
-full_name = atelier4.full_name
-is_mail = atelier4.is_mail
+import atelier4_ex1
+full_name = atelier4_ex1.full_name
+is_mail = atelier4_ex1.is_mail
 
 #Exercice 1
 def test_full_name()-> bool:
@@ -67,7 +67,8 @@ def test_is_mail()-> bool:
         print("str_arg :", str_test)
         print("Attendu :", tuple_attendu)
         print("Obtenu :", tuple_obtenu)
-        if tuple_attendu == tuple_obtenu:
+        if (tuple_attendu == tuple_obtenu
+                or tuple_attendu[0] == 1 and tuple_obtenu[0] == 1): # (1, x)
             print("SUCCES\n")
         else:
             print("ECHEC\n")
