@@ -18,7 +18,7 @@ def test_full_name()-> bool:
         bool: True si le test est réussi
               False en cas d'échec
     """
-    print("TEST full_name\n")
+    print("TEST full_name")
     lst_str_test = [' ', 'bisgambiglia paul', 'a b', 'üéì éàô'] #Chaînes de test
     lst_str_attendu = [' ', 'BISGAMBIGLIA Paul', 'A B', 'ÜÉÌ Éàô'] #Retours attendus
     succes = True #Résultat global du test
@@ -50,14 +50,14 @@ def test_is_mail()-> bool:
         bool: True si le test est réussi
               False en cas d'échec
     """
-    print("TEST is_mail\n")
+    print("\nTEST is_mail\n")
     lst_str_test = ['bisgambiglia_paul@univ-corse.fr',
                     '@univ-corse.fr',
                     'bisgambiglia_paulOuniv-corse.fr',
                     'bisgambiglia_paul@uni-corse.fr',
                     'bisgambiglia_paul@univ-corsePOINTfr'] #Chaînes de test
     #Retours attendus
-    lst_tuple_attendu = [(1, 0), (0, 1), (0, 2), (0, 3), (0, 4)]
+    lst_tuple_attendu = [(1, 6456), (0, 1), (0, 2), (0, 3), (0, 4)]
     succes = True #Résultat global du test
     nb_tests = len(lst_str_test) #Nombre de tests
     for i in range(nb_tests):
