@@ -121,11 +121,6 @@ def dictionnaire(fichier: str)-> [str]:
     outputs:
         [str]: Liste des mots présents dans le fichier
     """
-    lst_mot = []
     fichier = open(fichier, "r", encoding="utf-8") #Ouverture du fichier
-    ligne = fichier.readline() #Lecture d'une ligne
-    while ligne != "":
-        ligne = ligne.replace('\n', '')
-        lst_mot.append(ligne)
-        ligne = fichier.readline()
+    lst_mot = fichier.read().split('\n')
     return lst_mot
