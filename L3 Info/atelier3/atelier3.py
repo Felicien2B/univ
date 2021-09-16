@@ -514,11 +514,15 @@ def est_injective(lst_f: list)-> bool:
         bool: True si injection
               False sinon
     """
-    his = histo(lst_f) #On récupère la liste histogramme
-    for e in his:
-        if e > 1:
-            return False
-    return True
+    his = histo(lst_f)
+    inj = True
+    i = 0
+    while inj and i < len(his):
+        if his[i] > 1:
+            inj = False
+        else:
+            i += 1
+    return inj
 
 def est_surjective(lst_f: list)-> bool:
     """
@@ -532,10 +536,14 @@ def est_surjective(lst_f: list)-> bool:
               False sinon
     """
     his = histo(lst_f)
-    for e in his:
-        if e < 1:
-            return False
-    return True
+    surj = True
+    i = 0
+    while surj and i < len(his):
+        if his[i] < 1:
+            surj = False
+        else:
+            i += 1
+    return surj
 
 def est_bijective(lst_f: list)-> bool:
     """
@@ -570,25 +578,31 @@ test_histo()
 
 def affiche_histo(lst_f: list):
     """
-    Affiche l'histogramme d'une liste d'entiers
+    Affiche graphiquement l'histogramme d'une liste d'entiers
 
     inputs:
-        lst_f: list : Liste d'entiers'
+        lst_f: list : Liste d'entiers
     """
+    #Exemple : [0, 1, 3, 3]
+    # Affichage :                #
+    #                #   #       #
+    #               --| --| --| --|
+    #               0   1   3   3
     lst_h = histo(lst_f)
     MAXOCC = val_max(lst_h)
-    print("TEST HISTOGRAMME\n")
-    print("F=", lst_f, "\n")
     print("HISTOGRAMME")
-    for i in range(MAXOCC+1, 0, -1): #Affichage occurences
+    for i in range(MAXOCC+1, 0, -1): #Affichage occurences en partant du max
+    #Chaque nombre d'occurences est comparé à la ligne en cours
+    #Les occurences sont représentées par des #
         for e in lst_h:
             if e >= i:
                 occ = "   #"
             else:
                 occ = "    "
-            print(occ, end='')
+            print(occ, end='') #Affichage de la case
         print("") #Retour à la ligne
-    for i in range(len(lst_h)): #Affichage numéros des colonnes
+    #Affichage délimitations et numéros des colonnes
+    for i in range(len(lst_h)):
         print("| --", end='')
     print("|\n  ", end='')
     for i in range(len(lst_h)):
@@ -601,16 +615,16 @@ def affiche_histo(lst_f: list):
 
 def affiche_histo2(lst_f: list):
     """
-    Affiche l'histogramme d'une liste d'entiers
+    Affiche l'histogramme d'une liste d'entiers avec matplotlib.pyplot
 
     inputs:
-        lst_f:list : Liste d'entiers'
+        lst_f:list : Liste d'entiers
     """
     plt.hist(lst_f)
 
 def test_affiche_histo():
     """Test de l'affichage de l'histogramme"""
-    lst_f = [1, 5, 5, 5, 9, 11, 11, 15, 15, 15]
+    lst_f = [0, 0, 1, 2, 3, 3, 4, 5, 5, 5, 5, 6, 7, 7, 9, 11, 11, 15, 15, 15]
     affiche_histo(lst_f)
     affiche_histo2(lst_f)
 
