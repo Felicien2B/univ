@@ -39,14 +39,14 @@ def is_mail(str_arg: str)-> (int, int):
                     (1, x) Si l'adresse mail est valide
                     (0, 2) S'il n'y a pas de "@"
                     (0, 1) S'il n'y a rien avant le "@"
-                    (0, 3) S'il n'y a pas "univ-corse" à la suite du "@"
-                    (0, 4) S'il n'y a pas de ".fr" à la suite de "univ-corse"
+                    (0, 3) S'il n'y a pas de nom de domaine à la suite du "@"
+                    (0, 4) S'il n'y a pas de "." à la suite du nom de domaine
     """
     validite = (1, 0)
     lst_expressions = [r"@", #Liste des regex pour vérifier l'adresse mail
                        r".@",
-                       r"@univ-corse",
-                       r"univ-corse.fr$"]
+                       r"@[a-zA-Z0-9-]+",
+                       r"@[a-zA-Z0-9-]+\.[a-zA-Z]+$"]
     lst_codes_err = [2, 1, 3, 4] #Liste des codes d'erreur correspondantes
     i = 0
     while validite[0] == 1 and i < len(lst_expressions):
@@ -68,8 +68,8 @@ def saisie_mail()-> str:
     code = is_mail(mail)
     lst_msg = ["le corps n'est pas valide",
                "il manque l'@",
-               "le nom de domaine n'est pas valide (univ-corse)",
-               "il manque le .fr"]
+               "le nom de domaine n'est pas valide",
+               "il manque le ."]
     if code[0] == 1:
         msg = "Le mail est valide"
     else:
