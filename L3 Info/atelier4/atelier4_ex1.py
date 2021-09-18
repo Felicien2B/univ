@@ -46,7 +46,7 @@ def is_mail(str_arg: str)-> (int, int):
     lst_expressions = [r"@", #Liste des regex pour vérifier l'adresse mail
                        r".@",
                        r"@[a-zA-Z0-9-]+",
-                       r"@[a-zA-Z0-9-]+\.[a-zA-Z]+$"]
+                       r"@[a-zA-Z0-9-]+\.[a-zA-Z-.]+$"]
     lst_codes_err = [2, 1, 3, 4] #Liste des codes d'erreur correspondantes
     i = 0
     while validite[0] == 1 and i < len(lst_expressions):
