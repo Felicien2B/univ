@@ -6,8 +6,8 @@ Version : 1
 Description : Exercice 3 de l'atelier 4
 """
 
-from atelier4_ex2 import dictionnaire
 import random as rd
+from atelier4_ex2 import dictionnaire
 
 def places_lettre(ch: str, mot: str)-> [int]:
     """
@@ -48,6 +48,69 @@ def output_str(mot: str, lpos: [int])-> str:
         caracteres += " "
     return caracteres
 
+def build_list(file_name: str)-> [str]:
+    """
+    Retourne la liste des mots présents dans un fichier texte
+
+    inputs:
+        file_name: str : Nom du fichier
+
+    outputs:
+        [str]: Liste des mots présents dans le fichier]
+    """
+    lst_mot = []
+    fichier = open(file_name, "r", encoding="utf-8") #Ouverture du fichier
+    ligne = fichier.readline() #Lecture d'une ligne
+    while ligne != "":
+        ligne = ligne.split('\n')[0].lower()
+        lst_mot.append(ligne)
+        ligne = fichier.readline()
+    return lst_mot
+    
+def build_dict(lst: list)-> dict:
+    """
+    Construit un dictionnaire à partir d'une liste de mots
+    selon la taille des mots
+
+    inputs:
+        lst: list : Liste de mots
+
+    outputs:
+        dict: Dictionnaire avec la taille des mots comme clé,
+              et les mots comme valeur
+    """
+    dict_mots = {}
+    for elt in lst:
+        taille = len(elt) #Taille du mot
+        if dict_mots.get(taille) is None:
+            dict_mots[taille] = [elt] #Création de la clé si elle n'existe pas
+        #(elle n'existe pas tant qu'aucun des mots ajoutés n'a cette taille)
+        else:
+            dict_mots[taille].append(elt)
+    return dict_mots
+
+def select_word(sorted_words: dict, word_len: int)-> str:
+    """
+    Retourne un mot au hasard parmi les mots d'un dictionnaire
+    avec une taille choisie
+
+    inputs:
+        sorted_words: dict : Dictionnaire
+        word_len: int : Taille du mot à retourner
+
+    outputs:
+        str: Mot de taille word_len, pris au hasard dans le
+             dictionnaire sorted_words
+    """
+    lst_mots = sorted_words.get(word_len)
+    if lst_mots is None:
+        mot = ""
+    else:
+        longueur_lst = len(lst_mots)
+        indice_mot = rd.randint(0, longueur_lst) #Indice du mot sélectionné
+        mot = lst_mots[indice_mot]
+    return mot
+
 def run_game():
     """
     Lance le jeu du pendu
@@ -59,13 +122,45 @@ def run_game():
     C1 = "|/ \ "
     C0 = "|______"
     PENDU = [C5, C4, C3, C2, C1, C0] #Affichage du pendu
-    LIGNES = len(PENDU)
-    lst_mot = dictionnaire("littre.txt")
-    n_mots = len(lst_mot)
-    mot = lst_mot[rd.randint(0, n_mots)] #Tirage au sort du mot à trouver
+
+    #Tailles des mots par difficulté
+    TAILLE_EASY = [1, 6]
+    TAILLE_NORMAL = [7, 8]
+    #Les mots ni dans Easy ni dans Normal, sont dans Hard
+
+    lignes = len(PENDU)
+    coups = 5 #Coups restants
+    dict_mot = build_dict(build_list("capitales.txt"))
+
+    cles_dict_mot = list(dict_mot.keys())
+    #On prend les tailles des mots existantes dans la liste,
+    #séparées par difficulté
+    cles_easy = []
+    cles_normal = []
+    cles_hard = []
+    for cle in cles_dict_mot:
+        if cle >= TAILLE_EASY[0] and cle <= TAILLE_EASY[1]:
+            cles_easy.append(cle)
+        elif cle >= TAILLE_NORMAL[0] and cle <= TAILLE_NORMAL[1]:
+            cles_normal.append(cle)
+        else: #Mots difficiles
+            cles_hard.append(cle)
+
+    print("Choix de la difficulté (easy, normal ou hard)")
+    difficulte = ""
+    while difficulte not in ["E", "N", "H"]:
+        difficulte = input("Entrer une lettre (E/N/H) : ")[0].upper()
+    if difficulte == "E":
+        lst_cles = cles_easy
+    elif difficulte == "N":
+        lst_cles = cles_normal
+    else:
+        lst_cles = cles_hard
+    taille_mot = rd.choice(lst_cles)
+
+    mot = select_word(dict_mot, taille_mot) #Tirage au sort du mot à trouver
     lpos_trouve = [] #Pos des lettres trouvées
     trouve = False #True quand le mot est trouvé
-    coups = 5 #Coups restants
     while not trouve and coups > 0:
         print(output_str(mot, lpos_trouve)) #Affichage du mot caché
         print("Coups restants :", coups)
@@ -82,7 +177,7 @@ def run_game():
         else:
             lpos_trouve += lpos_prop
         #Affichage du pendu en fonction des coups restants
-        for i in range(LIGNES-coups):
+        for i in range(lignes-coups):
             print(PENDU[i])
         if len(lpos_trouve) == len(mot): #Si le mot est trouvé
             trouve = True
