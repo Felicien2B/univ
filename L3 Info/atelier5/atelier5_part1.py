@@ -43,12 +43,16 @@ def mix_list(list_to_mix: list)-> list:
     outputs:
         list: Liste mélangée
     """
-    list_mix = []
+    list_res = []
     taille = len(list_to_mix)
+    #On récupère les éléments de list_to_mix un par un,
+    #pour chaque élément on tire un nouvel indice
+    #(entre 0 et le nombre d'éléments déjà placés dans list_res)
+    #pour le placer dans list_res
     for ind_list_to_mix in range(taille):
-        ind_list_mix = rd.randint(0, ind_list_to_mix)
-        list_mix.insert(ind_list_mix, list_to_mix[ind_list_to_mix])
-    return list_mix
+        ind_list_res = rd.randint(0, ind_list_to_mix)
+        list_res.insert(ind_list_res, list_to_mix[ind_list_to_mix])
+    return list_res
 
 def test_mix_list():
     """
@@ -69,7 +73,7 @@ def test_mix_list():
         assert elt in mixed_list, ("La liste mélangée doit contenir "
             "les mêmes éléments que dans la liste de départ")
 
-#test_mix_list()
+test_mix_list()
 
 #Exercice 3
 def choose_element_list(list_in_which_to_choose: list):
@@ -145,4 +149,4 @@ def test_extract_element_list():
         assert elt in lst_sorted, ("La liste mélangée ne doit contenir "
                                    "que des éléments de la liste de départ")
 
-test_extract_element_list()
+#test_extract_element_list()
