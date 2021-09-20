@@ -143,6 +143,6 @@ def test_extract_element_list():
     print('Liste de départ après appel de la fonction est', lst_sorted)
     for elt in sublist:
         assert elt in lst_sorted, ("La liste mélangée ne doit contenir "
-            "que des éléments présents dans la liste de départ")
+                                   "que des éléments de la liste de départ")
 
 test_extract_element_list()
