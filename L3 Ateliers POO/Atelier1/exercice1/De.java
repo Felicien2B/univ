@@ -13,7 +13,7 @@ public class De {
 	//Constructeur du dé
 	public De(String nom, int nbFaces) {
 		if (nom == "" || nom == null) {
-			this.nom = "D� n�" + (nbDes+1); //Nom par défaut si le nom est vide
+			this.nom = "Dé n°" + (nbDes+1); //Nom par défaut si le nom est vide
 		}
 		else {this.nom = nom;}
 		
@@ -27,7 +27,7 @@ public class De {
 		this(null, 6); //Dé à 6 faces par défaut
 	}
 	
-	//Nom du d�
+	//Nom du dé
 	public String getNom() {
 		return nom;
 	}
