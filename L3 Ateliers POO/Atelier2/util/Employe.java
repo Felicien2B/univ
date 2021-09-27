@@ -4,8 +4,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Employe extends Personne {
-	private float salaire;
-	private final GregorianCalendar dateEmbauche;
+	protected float salaire;
+	protected final GregorianCalendar dateEmbauche;
 	
 	/**
      * Constructeur d'Employe
@@ -61,7 +61,7 @@ public class Employe extends Personne {
      * @param aEmbauche l'année de la date d'embauche
 	 * @return Retourne les informations du nouvel employé si les informations sont correctes
 	 */
-    public Employe createEmploye(String leNom, String lePrenom, int j, int m, int a,
+    public static Employe createEmploye(String leNom, String lePrenom, int j, int m, int a,
 			  					 int numero, String rue, String code_postal, String ville,
 			  					 float salaire, int jEmbauche, int mEmbauche, int aEmbauche) {
     	Employe em = null;
@@ -76,7 +76,7 @@ public class Employe extends Personne {
      * Augmente le salaire d'un employé suivant un pourcentage donné
 	 * @param pourcentage Pourcentage d'augmentation du salaire
 	 */
-    public void augmenterLeSalaire(float pourcentage) {
+    public void augmenterLeSalaire(double pourcentage) {
     	if (pourcentage > 0) {
     		this.salaire += this.salaire * (pourcentage/100);
     	}

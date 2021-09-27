@@ -3,7 +3,8 @@ package util;
 import java.util.GregorianCalendar;
 
 public class Manager extends Employe {
-	private Secretaire secretaire;
+	protected Secretaire secretaire;
+	private static final double BONUSSALAIRE = 0.5;
 
 	/**Constructeur de Manager
      * @param leNom le nom de la personne
@@ -12,12 +13,10 @@ public class Manager extends Employe {
 	 * @param lAdresse l'adresse de la personne
      * @param salaire le salaire de l'employé
      * @param dateEmbauche la date d'embauche de l'employé
-     * @param secretaire Secrétaire
      */
     protected Manager(String leNom, String lePrenom, GregorianCalendar laDate,
-    				  Adresse lAdresse, float salaire, GregorianCalendar dateEmbauche, Secretaire secretaire) {
+    				  Adresse lAdresse, float salaire, GregorianCalendar dateEmbauche) {
     	super(leNom, lePrenom, laDate, lAdresse, salaire, dateEmbauche);
-        this.secretaire = secretaire;
     }
     
     /**Constructeur de Manager
@@ -34,13 +33,12 @@ public class Manager extends Employe {
      * @param jEmbauche le jour de la date d'embauche
      * @param mEmbauche le mois de la date d'embauche
      * @param aEmbauche l'année de la date d'embauche
-     * @param secretaire Secrétaire
      */
     protected Manager(String leNom, String lePrenom, int j, int m, int a,
     				  int numero, String rue, String code_postal, String ville,
-    				  float salaire, int jEmbauche, int mEmbauche, int aEmbauche, Secretaire secretaire) {
+    				  float salaire, int jEmbauche, int mEmbauche, int aEmbauche) {
         this(leNom, lePrenom, new GregorianCalendar(a,m,j), new Adresse(numero,rue,code_postal,ville),
-        	 salaire, new GregorianCalendar(aEmbauche,mEmbauche,jEmbauche), secretaire);
+        	 salaire, new GregorianCalendar(aEmbauche,mEmbauche,jEmbauche));
     }
     
     /** Méthode createManager
@@ -57,18 +55,15 @@ public class Manager extends Employe {
      * @param jEmbauche le jour de la date d'embauche
      * @param mEmbauche le mois de la date d'embauche
      * @param aEmbauche l'année de la date d'embauche
-     * @param secretaire Secrétaire
 	 * @return Retourne les informations du nouveau manager si les informations sont correctes
 	 */
-    public Manager createManager(String leNom, String lePrenom, int j, int m, int a,
+    public static Manager createManager(String leNom, String lePrenom, int j, int m, int a,
 			  					 int numero, String rue, String code_postal, String ville,
-			  					 float salaire, int jEmbauche, int mEmbauche, int aEmbauche, Secretaire secretaire) {
+			  					 float salaire, int jEmbauche, int mEmbauche, int aEmbauche) {
     	Manager ma = null;
     	if(salaire > 0) {
     		ma = new Manager(leNom, lePrenom, j, m, a, numero, rue, code_postal, ville,
-  				  			 salaire, jEmbauche, mEmbauche, aEmbauche, secretaire);
-    		float pourcentage = ma.calculAnnuite()/2;
-    		ma.augmenterLeSalaire(pourcentage);
+  				  			 salaire, jEmbauche, mEmbauche, aEmbauche);
     	}
     	return ma;
     }
@@ -79,5 +74,16 @@ public class Manager extends Employe {
 	 */
     public void modifierSecretaire(Secretaire secretaire) {
     	this.secretaire = secretaire;
+    }
+    
+    /** Méthode augmenterLeSalaire
+     * Augmente le salaire d'un manager suivant un pourcentage donné, avec un bonus d'ancienneté
+	 * @param pourcentage Pourcentage d'augmentation du salaire (sans bonus)
+	 */
+    public void augmenterLeSalaire(double pourcentage) {
+    	if (pourcentage > 0) {
+    		pourcentage += calculAnnuite()*BONUSSALAIRE; //+0.5% pour chaque année
+    		this.salaire += this.salaire * (pourcentage/100);
+    	}
     }
 }
