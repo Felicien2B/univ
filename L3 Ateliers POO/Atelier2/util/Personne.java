@@ -72,6 +72,13 @@ public class Personne{
 		return adresse;
 	}
 	/**
+	 * Accesseur
+	 * @return retourne le nombre de personnes	 
+	 */
+	public static int getNbPersonnes() {
+		return nbPersonnes;
+	}
+	/**
 	 * Modificateur
 	 * @param retourne l'adresse	 
 	 */
@@ -121,7 +128,3 @@ public class Personne{
 		return res;
 	}
 }
-
-    
-   
-   
