@@ -89,8 +89,10 @@ public class Secretaire extends Employe {
 	 */
     public void augmenterLeSalaire(double pourcentage) {
     	if (pourcentage > 0) {
-    		pourcentage += this.getNbManagers()*BONUSSALAIRE; //+0.1% pour chaque manager géré
-    		this.salaire += this.salaire * (pourcentage/100);
+    		pourcentage += this.getNbManagers() * BONUSSALAIRE; //+0.1% pour chaque manager géré
+    		double salaire = getSalaire();
+    		salaire += salaire * (pourcentage/100);
+    		setSalaire(salaire);
     	}
     }
     

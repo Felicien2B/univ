@@ -6,11 +6,14 @@ import util.Adresse;
 
 public class Personne{
     private static final Adresse ADRESSE_INCONNUE = null;
+    private static final int AGEDEMAJORITE = 18;
     private String nom;
     private String prenom;
     private final GregorianCalendar dateNaissance;
     private Adresse adresse=ADRESSE_INCONNUE;
     private static int nbPersonnes = 0;
+    private static String nomDernierePersonneCreee;
+    private int ageObtentionDernierDiplome;
 	
 	/**
 	 * Constructeur de Personne
@@ -25,6 +28,7 @@ public class Personne{
 		dateNaissance=laDate;
 		adresse=lAdresse;
 		nbPersonnes++;
+		nomDernierePersonneCreee = nom;
 	}
 	
 	/** 
@@ -77,6 +81,27 @@ public class Personne{
 	 */
 	public static int getNbPersonnes() {
 		return nbPersonnes;
+	}
+	/**
+	 * Accesseur
+	 * @return retourne le nom de la dernière personne créée
+	 */
+	public String getNomDernierePersonneCreee(){
+		return nomDernierePersonneCreee;
+	}
+	/**
+	 * Accesseur
+	 * @return retourne l'âge de la majorité
+	 */
+	public int getAgeDeMajorite(){
+		return AGEDEMAJORITE;
+	}
+	/**
+	 * Accesseur
+	 * @return retourne l'âge de l'obtention du dernier diplôme
+	 */
+	public int getAgeObtentionDernierDiplome(){
+		return ageObtentionDernierDiplome;
 	}
 	/**
 	 * Modificateur

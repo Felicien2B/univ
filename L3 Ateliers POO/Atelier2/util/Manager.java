@@ -82,8 +82,10 @@ public class Manager extends Employe {
 	 */
     public void augmenterLeSalaire(double pourcentage) {
     	if (pourcentage > 0) {
-    		pourcentage += calculAnnuite()*BONUSSALAIRE; //+0.5% pour chaque année
-    		this.salaire += this.salaire * (pourcentage/100);
+    		pourcentage += calculAnnuite() * BONUSSALAIRE; //+0.5% pour chaque année
+    		double salaire = getSalaire();
+    		salaire += salaire * (pourcentage/100);
+    		setSalaire(salaire);
     	}
     }
 }
