@@ -16,7 +16,7 @@ public class Secretaire extends Employe {
      * @param dateEmbauche la date d'embauche de l'employé
      */
     protected Secretaire(String leNom, String lePrenom, GregorianCalendar laDate,
-    				  Adresse lAdresse, float salaire, GregorianCalendar dateEmbauche) {
+    				  Adresse lAdresse, double salaire, GregorianCalendar dateEmbauche) {
     	super(leNom, lePrenom, laDate, lAdresse, salaire, dateEmbauche);
     }
     
@@ -37,7 +37,7 @@ public class Secretaire extends Employe {
      */
     protected Secretaire(String leNom, String lePrenom, int j, int m, int a,
     				  int numero, String rue, String code_postal, String ville,
-    				  float salaire, int jEmbauche, int mEmbauche, int aEmbauche) {
+    				  double salaire, int jEmbauche, int mEmbauche, int aEmbauche) {
         this(leNom, lePrenom, new GregorianCalendar(a,m,j), new Adresse(numero,rue,code_postal,ville),
         	 salaire, new GregorianCalendar(aEmbauche,mEmbauche,jEmbauche));
     }
@@ -60,7 +60,7 @@ public class Secretaire extends Employe {
 	 */
     public static Secretaire createSecretaire(String leNom, String lePrenom, int j, int m, int a,
 			  					 int numero, String rue, String code_postal, String ville,
-			  					 float salaire, int jEmbauche, int mEmbauche, int aEmbauche) {
+			  					 double salaire, int jEmbauche, int mEmbauche, int aEmbauche) {
     	Secretaire se = null;
     	if(salaire > 0) {
     		se = new Secretaire(leNom, lePrenom, j, m, a, numero, rue, code_postal, ville,

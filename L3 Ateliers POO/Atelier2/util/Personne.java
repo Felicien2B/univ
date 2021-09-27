@@ -104,6 +104,20 @@ public class Personne{
 		return ageObtentionDernierDiplome;
 	}
 	/**
+	 * Accesseur
+	 * @return retourne l'âge d'une personne	 
+	 */
+	public int getAge() {
+		Calendar rightNow = Calendar.getInstance();
+		int age = rightNow.get(Calendar.YEAR) - dateNaissance.get(Calendar.YEAR);
+		if((dateNaissance.get(Calendar.MONTH) > rightNow.get(Calendar.MONTH))
+		   || (dateNaissance.get(Calendar.MONTH) == rightNow.get(Calendar.MONTH)
+		   && dateNaissance.get(Calendar.DAY_OF_MONTH) > rightNow.get(Calendar.DAY_OF_MONTH))) {
+			age--;
+			}
+		return age;
+	}
+	/**
 	 * Modificateur
 	 * @param retourne l'adresse	 
 	 */
